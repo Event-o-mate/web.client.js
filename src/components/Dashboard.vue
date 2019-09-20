@@ -1,0 +1,41 @@
+<template>
+
+<div class="container" id="dashboard-page">
+    <div class="row">
+
+      <div class="col-md-8 offset-md-2" id="dashboard-wrapper">
+        <div class="row">
+
+          <div class="col-md-6">
+          
+            <ul class="event-list">
+              <h3>My Created Events</h3>
+              <li class="event-list-item" repeat="event in dashboard.hostingEvents">
+                <h5><a ng-href="#/event/event.id">event.title</a></h5>
+                <p><img src="img/time.png">event.start_date | date : 'dd MMMM yyyy HH:mm'</p>
+                <p><img src="img/location.png">event.address</p>
+              </li>
+            </ul>
+
+          </div>
+
+          <div class="col-md-6">
+          
+            <ul class="event-list">
+              <h3>My RSVP'd Events</h3>
+              <li class="event-list-item" repeat="event in dashboard.attendingEvents">
+                <h5><a ng-href="#/event/event.id">event.title</a></h5>
+                <p><img src="img/time.png">event.start_date | date : 'dd MMMM yyyy HH:mm' </p>
+                <p><img src="img/location.png">event.address</p>
+              </li>
+            </ul>
+
+          </div>
+        
+        </div>
+      </div>
+
+  </div>
+</div>
+    
+</template>
