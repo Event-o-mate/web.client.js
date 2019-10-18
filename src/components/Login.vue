@@ -1,42 +1,82 @@
 <template>
-    
+    <div class="box" >
+      <div class="partition" id="partition-register">
+        <div class="partition-form">
+          <form autocomplete="false">
 
-  <!-- LOGIN MENU-->
-<script type="text/ng-template" id="loginDialog">
-  <form name="loginForm" required>
-    <div class="login-dialog">
-      <input type="email" name="userEmail" class="input-email-login ng-remove-focus" placeholder="email*" ng-model="email" autocomplete="off" required>
-      <input name="userPassword" class="input-password-login ng-remove-focus" placeholder="password*" type="password" ng-model="password" autocomplete="off" required>
-      <button class="button-dropdown  btn" ng-click="login()"> LOGIN</button>
-      <p><a href ng-click=closeThisDialog("register")>Don't have an account? Register.</a></p>
+            <div class="autocomplete-fix">
+              <input type="password">
+            </div>
 
-      <!--alerts-->
-      <!-- email -->
-      <div ng-messages="loginForm.userEmail.$error" ng-if="loginForm.userPassword.$touched">
-        <div ng-message="required" class="alert alert-danger login-errors" role="alert">
-          Please eneter all required fields!
-        </div>
-        <div ng-message="email" class="alert alert-danger login-errors" role="alert">
-          Input is not a valid email!
-        </div>
-      </div>
+            <div class="form-login">
+            <input type="text" placeholder="Email" v-model="model.email">
+            <input type="password" placeholder="Password" v-model="model.password">
+            </div>
+          </form>
 
-      <!-- password -->
-      <div ng-messages="loginForm.userPassword.$error" ng-if="loginSubmited">
-        <div ng-message="required" class="alert alert-danger login-errors" role="alert">
-          Please eneter all required fields!
+          <div class="button-set">
+            <button style="position: center;" @keyup.enter.native="login()" id="goto-signin-btn" @click="login()">Login</button>
+          </div>
+            <p><a class="form-login"  @click="handleRegister()">Don't have an account? Register.</a></p>
+            <p><a class="alert-login" v-if="validated" style="color: white;">An email and password need to be present.</a></p>
+          </div>
         </div>
       </div>
-
-      <!-- submited -->
-      <div class="alert alert-danger text-center login-errors" role="alert" ng-hide="!userValid" ng-show="loginSubmited && !userValid">
-        {{ errorMsg }}
-      </div>
-
-    </div>
-
-  </form>
-
-</script>
-
 </template>
+
+<script>
+import { ValidationProvider } from 'vee-validate';
+import RegisterForm from '@/components/Register.vue'
+import UserService from '@/services/UserService.vue'
+
+export default {
+  name: "LoginForm",
+  components: {
+    ValidationProvider,
+    RegisterForm,
+    UserService
+  },
+  data(){
+    return { 
+      model: {
+          email: '',
+          password: '',
+          rememberMe: false
+      },
+      errors: [],
+      showRegisterModal: false,
+      submitted: false,
+      errorMsg: 'An email and password need to be present.',
+      userValid: false,
+      isValidationAllowed: false,
+      searchTerm: '',
+    }
+  },
+  computed: {
+    validated() {
+      return this.isValidationAllowed && !this.searchTerm
+    },
+  },
+  methods: {
+    validate() {
+      this.isValidationAllowed = true;
+    },
+    login () {
+        const user = { email: this.model.email, password: this.model.password }
+
+        UserService.login(user).then((r) => {
+          console.log(r.data.id);
+          this.$router.push({ path: '/dashboard' })
+          this.$router.push({ name: 'dashboard' })
+          this.$emit('clos');
+          this.$store.dispatch("setToken", r.data.id);
+          }).catch(error => {
+
+        });
+    },
+    handleRegister(){
+      this.$emit('close');
+    },
+  }
+}
+</script>

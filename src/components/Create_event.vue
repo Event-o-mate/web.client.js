@@ -2,121 +2,73 @@
       <!-- CREATE EVENT FORM -->
   <div class="container" id="create-event">
     <div class="row">
-
+      <div class="snt-rotating-bg-container">
+            <object class="snt-rotating-bg" type="image/svg+xml" data="img/rotoBg.svg">
+              Your browser does not support SVG
+            </object>	
+          </div>
       <div class="col-md-6 offset-md-3">
           <h1 class="text-center">Create new event</h1>
           <form role="form" class="text-left" name="createEventForm">
+            
               <div class="form-group">
                   <label class="control-label" for="inputLabel1">Event name*</label>
-                  
-                  <span messages="createEventForm.eventTitle.$error" if="createEventForm.eventTitle.$touched">
-                    <span message="required" class="event-errors" role="alert" v-show="false">
-                      Please fill in required fields!
-                    </span>
-                  </span>
-
-                  <input name="eventTitle" type="text" class="form-control" id="inputLabel1" data-com.agilebits.onepassword.user-edited="yes" model="event.title" required>
+                  <validation-provider style="color: red;" rules="required" v-slot="{ errors }"> 
+                  <span style="float: right;"> {{ errors[0] }}</span>
+                  <input v-model="model.tittle" name="eventTitle" type="text" class="form-control" id="inputLabel1" required>
+                  </validation-provider>
               </div>
+
               <div class="row">
                   <div class="col-md-6 dropdown">
-                    
                     <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target="#">
                       <div id="dropdown form-group dropdown-start-parent">
                         <label>Start time*</label>
-
-                        <span messages="createEventForm.startTime.$error" if="createEventForm.startTime.$touched">
-                          <span message="required" class="event-errors" role="alert" v-show="false">
-                            Fill in required field!
-                          </span>
-                        </span>
-                        
-
-                      <VueCtkDateTimePicker :no-value-to-custom-elem="(true|false)">
-                          <input name="startTime" type="text" id="inputLabel2" class="form-control" required>
-                      </VueCtkDateTimePicker>
+                        <validation-provider style="color: red;" rules="required" v-slot="{ errors }"> 
+                        <span style="float: right;"> {{ errors[0] }}</span>
+                        <flat-pickr name="startTime" type="text" id="inputLabel1" class="form-control flatpickr-input flatpickr-mobile" v-model="model.startTime" :config="config" placeholder="" ></flat-pickr>
+                        </validation-provider>
                       </div>
                     </a>
                   </div>
+
                   <div class="col-md-6 dropdown">
                     <a class="dropdown-toggle" id="dropdownEnd" role="button" data-toggle="dropdown" data-target="#">
-                      <div class="input-group">
                         <label class="control-label" for="inputLabel1">End time*</label>
-
-                        <span messages="createEventForm.endTime.$error" if="createEventForm.endTime.$touched">
-                          <span message="required" class="event-errors" role="alert" v-show="false">
-                            Fill in required field!
-                          </span>
-                        </span>
-
-                      <VueCtkDateTimePicker :no-value-to-custom-elem="(true|false)">
-                          <input name="endTime" type="text" id="inputLabel2" class="form-control" required>
-                      </VueCtkDateTimePicker>
-                      </div>
+                        <validation-provider style="color: red;" rules="required" v-slot="{ errors }"> 
+                        <span style="float: right;"> {{ errors[0] }}</span>
+                        <flat-pickr name="endTime" type="text" id="inputLabel1" class="form-control flatpickr-input flatpickr-mobile" v-model="model.endTime" :config="config" placeholder=""></flat-pickr>
+                        </validation-provider>
                     </a>
                   </div>
               </div>
+
               <div class="form-group">
-                  <label class="control-label" for="inputLabel1">Location*</label>
-
-                  <span messages="createEventForm.location.$error" if="createEventForm.location.$touched">
-                    <span message="required" class="event-errors" role="alert" v-show="false">
-                      Please fill in required fields!
-                    </span>
-                  </span>
-
-                  <input src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0RHeKaRM5yXF0nPc2Er4vOEYUPcbtpTE&libraries=places" name="location" type="text" class="form-control" id="inputLabel1" data-com.agilebits.onepassword.user-edited="yes" g-places-autocomplete model="event.location" required>
+                  <label class="control-label" for="textareaLabel1">Location*</label>
+                    <validation-provider ref="provider" name="currentPlace" style="color: red;" rules="required|location" v-slot="{ errors }"> 
+                    <span style="float: right;"> {{ errors[0] }}</span>
+                    <gmap-autocomplete class="form-control" placeholder="" @place_changed="setAddress" @input="setAddress" ></gmap-autocomplete>
+                    </validation-provider>
               </div>
+
               <div class="form-group">
                   <label class="control-label" for="textareaLabel1">Description</label>
-                  <textarea class="form-control" id="textareaLabel1" model="event.description"></textarea>
+                    <validation-provider style="color: red;" rules="required" v-slot="{ errors }"> 
+                    <span style="float: right;"> {{ errors[0] }}</span>
+                    <textarea v-model="model.description" class="form-control" id="textareaLabel1"></textarea>
+                    </validation-provider>
               </div>
-
-              <div class="details-wrapper event-section" repeat="section in event.sections" id="myDIV" v-show="false">
-                <button type="button" class="remove-section-btn close" aria-label="Close">
-                  <span aria-hidden="true" @click="onCancel">&times;</span>
-                </button>
-                
-                <div class="container" show="section.type == 'comments'">
-                  <div class="row">
-                    <div class="col-md-2"><img src="img/user-placeholder.png" class="snt-comment-profile-img" v-show="false"></div>
-                    <div class="snt-comment-content col-md-10" v-show="false">
-                      <textarea placeholder="Write a comment ..."></textarea>
-                    </div>
-                  </div>
-                  <div class="row" v-show="false">
-                    <div class="col-md-12" v-show="false">
-                      <a class="snt-submit-comment btn btn-xs btn-primary disabled">Submit</a>
-                    </div>
-                  </div>  
-                </div>
-
-                <div class="container" v-show="false">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <p>Image Gallery section will be added soon!</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="container" v-show="false">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <p>Facebook Invitations section will be added soon!</p>
-                    </div>
-                  </div>
-                </div>
-
-                <ul class="widgets-list" v-show="true">
-                  <li class="comment-widget-icon" @click="event.selectWidget('comments')"></li>
-                  <li class="photos-widget-icon" @click="event.selectWidget('img-gallery')" ></li>
-                  <li class="fb-invitations-widget-icon" @click="event.selectWidget('fb-invitations')" ><div class="fb-icon-bg"></div></li>
-                </ul>
-
-              </div>
+              </form>
+              <span v-for="index in addCounter" :key="index">
+                <button class="remove-section-btn close" aria-label="Close" @click="handleRemove()">&times;</button>
+                    <description-form 
+                  :v-show="showAddModal"  
+                  @cancelDescription="afterDescription('cancel')"
+                  @successDescription="afterDescription('success')" />
+              </span>
               
-              <button type="button" class="btn btn-add-section"  @click="myFunction()">+ Add new Section</button>
-              <button type="button" class="btn btn-publish" @click="event.createEvent()"> Publish event </button>
-          </form>
+              <button type="button" class="btn btn-add-section"  @click="handleAdd()">+ Add new Section</button>
+              <button type="button" class="btn btn-publish" @click="submit()" href="Dashboard"> Publish event </button>
         </div><!-- END COL -->
 
       </div><!-- END ROW -->
@@ -124,40 +76,100 @@
 </template>
 <script>
 
-import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
-import VueGoogleAutocomplete from 'vue-google-autocomplete'
+import flatPickr from 'vue-flatpickr-component';
+import 'flatpickr/dist/flatpickr.css';
+import 'flatpickr/dist/themes/dark.css';
+import DescriptionForm from '@/components/Description.vue'
+import { ValidationProvider } from 'vee-validate';
+import EventService from '@/services/EventService.vue'
 
 export default {
-  components:{
-    VueCtkDateTimePicker,
-    VueGoogleAutocomplete,
+  components:{      
+    flatPickr,
+    DescriptionForm,
+    ValidationProvider,
+    EventService
   },
   data(){
     return {
-      location,
+      model: {
+        tittle: '',
+        address: '',
+        startTime: '',
+        endTime: '',
+        lat: '',
+        lng: '',
+        description: ''
+      },
+      errors: [],
+      description: '',
+      isEmpty: false,
+      searchTerm: '',
+      place: null,
+      places: [],
+      currentPlace: null,
+      showAddModal: false,
+      addCounter: 0,
+      config: {
+        wrap: true,
+        altInput: false,
+        enableTime: true,
+        disableMobile: true,
+        dateFormat: "d-m-Y H:i",
+      },
     }
   },
+
   methods: {
-    onCancel() {
-      var x = document.getElementById("myDIV");
-      if (x.style.display === "none") {
-        x.style.display = "block";
+    handleInput (value) {
+    this.model.address = value;
+  },
+    setAddress(address) {
+      if(!(address instanceof InputEvent)) {
+        this.model.address = address.name;
+        console.log(this.$route.params.id_token)
+
+        this.$refs.provider.reset()
+        router.push({ path: "/dashboard"})
+        router.push({ name: "dashboard"})
       } else {
-        x.style.display = "none";
-        }
-      },
-    myFunction() {
-      var x = document.getElementById("myDIV");
-      if (x.style.display === "none") {
-        x.style.display = "block";
-      } else {
-        x.style.display = "none";
-        }
-      },
-    OtherFunction(){
-      
-    }
-  }
+        this.$refs.provider.applyResult({
+          errors: ['Please fill in this field.'],
+          valid: false,
+          failedRules: {}
+        });
+      }
+    },
+    handleAdd() {
+      this.addCounter++;
+    },
+    afterDescription () {
+      this.showAddModal = false;
+    },
+    handleRemove() {
+          this.addCounter--;
+    },
+    submit() {
+      const event = { 
+        tittle: this.model.tittle,
+        address: this.model.address,
+        startTime: this.model.startTime,
+        endTime: this.model.endTime,
+        lat: this.model.lat,
+        lng: this.model.lng,
+        description: this.model.description
+      }
+      EventService.create(event, this.$store.getters).then((r) => {
+          console.log(r.data.id);
+          let token = this.$store.getters.getToken
+          console.log(token)
+        }).catch(error => {
+
+        });
+    },
+  },
 }
 
 </script>
+<style>
+</style>
