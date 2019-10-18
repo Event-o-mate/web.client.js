@@ -159,8 +159,9 @@ export default {
         lng: this.model.lng,
         description: this.model.description
       }
-      EventService.create(event, this.$store.getters).then((r) => {
-          console.log(r.data.id);
+      console.log(this.$store.getters["getToken"]);
+      EventService.create(event, this.$store.getters["getToken"]).then((r) => {
+          console.log(r);
           let token = this.$store.getters.getToken
           console.log(token)
         }).catch(error => {

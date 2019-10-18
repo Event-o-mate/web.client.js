@@ -2,9 +2,8 @@
 import client from '@/util/client';
 
 export default {
-  create (event) {
-    console.log(this.$store("getToken", r.data.id))
-    return client.post('/api/users/' + r.data.id + '/events', event);
+  create (event, id) {
+    return client.post('/api/users/' + id + '/events', event);
   },
   getEvent (id) {
     return client.get('/api/users/' + r.data.id + '/events/' + id);
