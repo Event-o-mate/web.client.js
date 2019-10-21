@@ -164,6 +164,8 @@ export default {
           console.log(r);
           let token = this.$store.getters.getToken
           console.log(token)
+          this.$router.push({ path: '/dashboard' })
+          this.$router.push({ name: 'dashboard' })
         }).catch(error => {
 
         });

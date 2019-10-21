@@ -16,11 +16,20 @@
                 <div class="nav-item">
                     <a class="nav-link register-button"  @click="handleRegister()" > Register</a>
                 </div>
+
+                <div class="nav-item">
+                    <a class="nav-link dashboard-button" v-if="user" href="#/dashboard"> Dashboard</a>
+                </div>
                 
                 <div class="nav-item">
                     <a class="nav-link login-button" @click="handleLogin()" > Log In</a>
                 </div>
+
+                <div class="nav-item">
+                    <a class="nav-link logout-button" ng-show="menu.security.userValid" @click="menu.logout()" href>Log Out </a>
+                </div>
             </ul>
+
 
         </div>
         <modal :name="'demo-login'">
