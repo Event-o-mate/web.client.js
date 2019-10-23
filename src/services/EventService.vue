@@ -6,10 +6,10 @@ export default {
     return client.post('/api/users/' + id + '/events', event);
   },
   getEvent (id) {
-    return client.get('/api/users/' + r.data.id + '/events/' + id);
+    return client.get('/api/users/' + id + '/events/');
   },
-  getEvents (event){
-    return client.get('/api/users/' + this.$store.getters.getToken + '/events', event);
+  getEvents (event, id){
+    return client.get('/api/users/' + id  + '/events', event);
   }
 }
 

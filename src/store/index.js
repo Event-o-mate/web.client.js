@@ -28,7 +28,11 @@ export default new Vuex.Store({
       }
       let user = localStorage.getItem("user");
       return JSON.parse(user);
-    }
+    },
+    isLoggedIn(state) {
+      return state.user !== null;
+  }
+
   },
 
   mutations: {
@@ -40,6 +44,9 @@ export default new Vuex.Store({
       state.user = user;
       localStorage.setItem("user", JSON.stringify(user));
     },
+    setAuthUser(state, user) {
+      state.user = user;
+  }
   },
 
   actions: {

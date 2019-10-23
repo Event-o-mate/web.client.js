@@ -47,7 +47,6 @@ export default {
       showRegisterModal: false,
       submitted: false,
       errorMsg: 'An email and password need to be present.',
-      userValid: false,
       isValidationAllowed: false,
       searchTerm: '',
     }
@@ -68,7 +67,7 @@ export default {
           console.log(r.data.id);
           this.$router.push({ path: '/dashboard' })
           this.$router.push({ name: 'dashboard' })
-          this.$emit('clos');
+          this.$emit('success');
           this.$store.dispatch("setToken", r.data.id);
           }).catch(error => {
 

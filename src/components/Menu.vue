@@ -14,22 +14,21 @@
                 </div>
 
                 <div class="nav-item">
-                    <a class="nav-link register-button"  @click="handleRegister()" > Register</a>
+                    <a class="nav-link register-button" v-if="isAuthenticated === false"  @click="handleRegister()" > Register</a>
                 </div>
 
                 <div class="nav-item">
-                    <a class="nav-link dashboard-button" v-if="user" href="#/dashboard"> Dashboard</a>
+                    <a class="nav-link dashboard-button" v-if="isAuthenticated === true"  href="#/dashboard"> Dashboard</a>
                 </div>
                 
                 <div class="nav-item">
-                    <a class="nav-link login-button" @click="handleLogin()" > Log In</a>
+                    <a class="nav-link login-button" v-if="isAuthenticated === false" @click="handleLogin()" > Log In</a>
                 </div>
 
                 <div class="nav-item">
-                    <a class="nav-link logout-button" ng-show="menu.security.userValid" @click="menu.logout()" href>Log Out </a>
+                    <a class="nav-link logout-button" v-if="isAuthenticated === true" @click="menu.logout()" href>Log Out </a>
                 </div>
             </ul>
-
 
         </div>
         <modal :name="'demo-login'">
@@ -62,10 +61,16 @@ export default {
     data(){
     return {
         showLoginModal: false,
-        showRegisterModal: false
+        showRegisterModal: false,
+        userValid: false,
+        isAuthenticated: false
         }
     },
     methods: {
+        afterAdd (ev) {
+            this.$modal.hide('demo-login');
+            this.isAuthenticated = true;
+        },
         handleLogin () {
             this.$modal.show('demo-login');
         },
@@ -78,6 +83,15 @@ export default {
         },
         afterClose2(ev) {
             this.$modal.hide('demo-login');
+        },
+        afterLogin () {
+            this.userValid = true;
+        },
+        login() {
+            this.isAuthenticated = true;
+        },
+        logout() {
+            this.isAuthenticated = false;
         }
 
     
