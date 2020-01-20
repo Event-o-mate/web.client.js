@@ -76,6 +76,7 @@ export default {
     handleRegister(){
       this.$emit('close');
     },
-  }
+  },
+  
 }
 </script>

@@ -10,7 +10,7 @@
           
             <ul class="event-list">
               <h3>My Created Events</h3>
-              <li class="event-list-item" repeat="event in dashboard.hostingEvents">
+              <li class="event-list-item" v-for="event in Events" v-bind:key="event">
                 <h5><a style="cursor: pointer;"  href="#/event/event.id">model.title</a></h5>
                 <p><img src="img/time.png">model.start_date | date : 'dd MMMM yyyy HH:mm'</p>
                 <p><img src="img/location.png">model.address</p>
@@ -47,6 +47,7 @@ import createEvent from '@/components/Create_event.vue'
 export default {
   components: {
     createEvent,
+    EventService
   },
   data() {
     return {
@@ -84,13 +85,16 @@ export default {
   },
   methods: {
     getEvents(){
-      EventService.getEvents().then((r) => {
-      this.tableData = r.data;
-          this.reinitializeSearch(this.propsToSearch);
+      console.log(this.$store.getters["getToken"]);
+      EventService.getEvents(event, this.$store.getters["getToken"]).then((r) => {
+          console.log(r);
+          console.log(events)
+          let token = this.$store.getters.getToken
+          console.log(token)
         }).catch(error => {
 
         });
+     },
     }
-  }
 }
 </script>

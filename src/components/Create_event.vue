@@ -126,7 +126,7 @@ export default {
   },
     setAddress(address) {
       if(!(address instanceof InputEvent)) {
-        this.model.address = address.name;
+        this.model.address = address;
         console.log(this.$route.params.id_token)
 
         this.$refs.provider.reset()
@@ -152,7 +152,7 @@ export default {
     submit() {
       const event = { 
         tittle: this.model.tittle,
-        address: this.model.address,
+        address: this.model.setAddress,
         startTime: this.model.startTime,
         endTime: this.model.endTime,
         lat: this.model.lat,
