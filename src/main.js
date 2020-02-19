@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
-import VueFlatPickr from 'vue-flatpickr-component';
-import * as VueGoogleMaps from "vue2-google-maps";
+import VueFlatPickr from 'vue-flatpickr-component'
+import * as VueGoogleMaps from 'vue2-google-maps'
 import VueJsModal from 'vue-js-modal'
-import vStylish from 'v-stylish';
-import { ValidationProvider, extend } from 'vee-validate';
-import { required } from 'vee-validate/dist/rules';
-import store from "./store/index";
+import vStylish from 'v-stylish'
+import { ValidationProvider, extend } from 'vee-validate'
+import { required } from 'vee-validate/dist/rules'
+import store from './store/index'
 
-import 'flatpickr/dist/flatpickr.css';
+import 'flatpickr/dist/flatpickr.css'
 import '@/assets/js/jquery.min.js'
 import '@/assets/js/bootstrap.min.js'
 import '@/assets/css/bootstrap.min.css'
@@ -21,25 +21,25 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-Vue.use(VueFlatPickr);
+Vue.use(VueFlatPickr)
 
 Vue.use(VueRouter)
 
 Vue.use(VueJsModal)
 
-Vue.use(vStylish);
+Vue.use(vStylish)
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: "AIzaSyC20xo5vUPz42LM5lG0GOhdwjniQR7pUu0",
-    libraries: "places" // necessary for places input
-  }
-});
+    key: 'AIzaSyC20xo5vUPz42LM5lG0GOhdwjniQR7pUu0',
+    libraries: 'places', // necessary for places input
+  },
+})
 
 extend('required', {
   ...required,
-  message: 'Please fill in this field.'
-});
+  message: 'Please fill in this field.',
+})
 
 Vue.config.productionTip = false
 
@@ -49,14 +49,14 @@ import Dashboard from '@/components/Dashboard.vue'
 import Event from '@/components/Event.vue'
 
 const routes = [
-  { path: '/', component: Home },
+  { path: '/', name: 'home', component: Home },
   { path: '/create_event', component: Create_event },
   { path: '/dashboard', name: 'dashboard', component: Dashboard },
-  { path: '/event', component: Event},
+  { path: '/event', component: Event },
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
 })
 
 new Vue({
@@ -64,9 +64,9 @@ new Vue({
   router,
   store,
   components: {
-    ValidationProvider
+    ValidationProvider,
   },
   data: () => ({
-    value: ''
-  })
+    value: '',
+  }),
 }).$mount('#app')
