@@ -1,5 +1,5 @@
 <template>
-  <nav class="snt-navbar navbar navbar-expand-lg navbar-dark fixed-top ng-scope">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <button
       class="navbar-toggler collapsed"
       type="button"
@@ -51,13 +51,25 @@
     <modal name="login">
       <login-form
         @cancel="hide('login')"
-        @success="hide('login'); login()"
-        @redirected-to-register="hide('login'); show('register')"
+        @success="
+          hide('login')
+          login()
+        "
+        @redirected-to-register="
+          hide('login')
+          show('register')
+        "
       />
     </modal>
 
     <modal name="register">
-      <register-form @cancel="hide('register')" @success="hide('register'); login()" />
+      <register-form
+        @cancel="hide('register')"
+        @success="
+          hide('register')
+          login()
+        "
+      />
     </modal>
     <modal name="profile">
       <profile-card />
@@ -98,4 +110,3 @@ export default {
   },
 }
 </script>
-

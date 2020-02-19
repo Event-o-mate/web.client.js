@@ -1,0 +1,19 @@
+$display-map: (
+  block: (
+    display: (
+      base: block,
+    ),
+  ),
+  box: (
+    box-sizing: (
+      base: border-box,
+    ),
+  ),
+  display: (
+    display: (
+      none: none,
+    ),
+  ),
+);
+
+@include generateSelectorProps($display-map, breakpoints);

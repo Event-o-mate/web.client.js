@@ -1,21 +1,21 @@
 <template>
   <div id="app">
-    <Menu/>
+    <menu-rf />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Menu from './components/Menu.vue'
+import MenuRf from './components/Menu.rf.vue'
 
 export default {
   name: 'app',
   components: {
-    Menu,
+    MenuRf,
   },
 }
 </script>
 
-<style>
-
+<style lang="scss">
+//
 </style>

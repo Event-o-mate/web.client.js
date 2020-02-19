@@ -1,0 +1,93 @@
+$generator-default-selector-type: '%';
+
+@function getSelectorMap($selector) {
+  $type: str-slice($selector, 1, 1);
+  $name: $selector;
+  $full: $selector;
+  @if ($type == '.' or $type == '%') {
+    $name: str-slice($selector, 2, -1);
+  } @else {
+    $type: $generator-default-selector-type;
+    $full: str-insert($selector, $type, -100);
+  }
+  @return (type: $type, name: $name, full: $full);
+}
+
+@mixin mapState($state, $property, $value) {
+  &--#{$state}:#{$state} {
+    #{$property}: $value;
+  }
+}
+
+@mixin mapProperty($properties, $map, $options: null) {
+  @each $key, $value in $map {
+    &#{if($key == 'base', '', -#{$key})} {
+      @if type-of($value) == 'map' {
+        @include mapProperty($properties, $value, $options);
+      } @else {
+        @each $prop in $properties {
+          #{$prop}: $value;
+          @if index($options, hover) {
+            @include mapState(hover, $prop, $value);
+          }
+          @if index($options, focus) {
+            @include mapState(focus, $prop, $value);
+          }
+          @if index($options, active) {
+            @include mapState(active, $prop, $value);
+          }
+          @if index($options, disabled) {
+            @include mapState(disabled, $prop, $value);
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin mapBreakpoints($parsedSelector, $property, $map, $options: null) {
+  $selectorType: map-get($parsedSelector, type);
+  $selectorName: map-get($parsedSelector, name);
+
+  @each $key, $value in $breakpoint-map {
+    @media (min-width: $value) {
+      #{$selectorType}#{$key}_#{$selectorName} {
+        @include mapProperty($property, $map, $options);
+      }
+    }
+  }
+}
+
+@mixin generate($selector, $property, $map, $options: null) {
+  $breakpointFlag: index($options, breakpoints);
+
+  // IF SELECTOR PASSED FROM GENERATEPROPMAP DONT RECALCULATE
+  $parsedSelector: $selector;
+  @if type-of($selector) != 'map' {
+    $parsedSelector: getSelectorMap($selector);
+  }
+  $fullSelector: map-get($parsedSelector, full);
+
+  // MAP PROPERTIES
+  #{$fullSelector} {
+    @include mapProperty($property, $map, $options);
+  }
+
+  // MAP BREAKPOINT PROPERTIES
+  @if $breakpointFlag {
+    @include mapBreakpoints($parsedSelector, $property, $map, $options);
+  }
+}
+
+@mixin generateProps($selector, $propMap, $options: null) {
+  $parsedSelector: getSelectorMap($selector);
+  @each $prop, $map in $propMap {
+    @include generate($parsedSelector, $prop, $map, $options);
+  }
+}
+
+@mixin generateSelectorProps($selectorPropMap, $options: null) {
+  @each $selector, $propMap in $selectorPropMap {
+    @include generateProps($selector, $propMap, $options);
+  }
+}
