@@ -1,8 +1,7 @@
 @mixin extendList($selectors) {
   @if $selectors != null {
     @each $selector in $selectors {
-      $fullSelector: map-get(getSelectorMap($selector), full);
-      @extend #{$fullSelector};
+      @extend #{fullSelector($selector)};
     }
   }
 }
@@ -25,8 +24,7 @@
 }
 
 @mixin extend($selector, $extensions, $baseExtensions: null) {
-  $fullSelector: map-get(getSelectorMap($selector), full);
-  #{$fullSelector} {
+  #{fullSelector($selector)} {
     @if type-of($extensions) == 'map' {
       @include extendMap($extensions, $baseExtensions);
     } @else {

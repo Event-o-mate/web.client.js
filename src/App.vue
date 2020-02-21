@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <menu-rf />
+    <Menu />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import MenuRf from './components/Menu.rf.vue'
+import Menu from './components/Menu.rf.vue'
 
 export default {
   name: 'app',
   components: {
-    MenuRf,
+    Menu,
   },
 }
 </script>

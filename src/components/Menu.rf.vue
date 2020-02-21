@@ -2,39 +2,33 @@
   <nav class="rf-nav">
     <ul class="rf-nav-wrap">
       <li class="rf-nav-logo">
-        <router-link to="/" class="rf-nav-link">Event-O-Mate</router-link>
-      </li>
-      <li class="rf-nav-item">
-        <router-link to="create_event" class="rf-nav-link">
-          <div class="rf-nav-create-event-btn">
-            <p>Create Event</p>
-          </div>
+        <router-link to="/">
+          <h1 class="rf-nav-logo-text">Event-O-Mate</h1>
         </router-link>
       </li>
-      <li class="rf-nav-item" v-if="!isAuthenticated">
-        <button @click="show('register')">Register</button>
+      <li class="rf-nav-link">
+        <router-link to="create_event" class="rf-nav-create-event-btn">Create Event</router-link>
       </li>
-      <li class="rf-nav-item" v-if="!isAuthenticated">
-        <button @click="show('login')">Login</button>
+      <li class="rf-nav-link" v-if="!isAuthenticated">
+        <a @click="show('register-modal')">Register</a>
       </li>
-      <li class="rf-nav-item">
-        <router-link to="dashboard" class="rf-nav-link" v-if="!isAuthenticated">Dashboard</router-link>
+      <li class="rf-nav-link" v-if="!isAuthenticated">
+        <a @click="show('login-modal')">Login</a>
       </li>
-      <li class="rf-nav-item" v-if="!isAuthenticated" @click="logout()">
-        <button>Logout</button>
+      <li class="rf-nav-link">
+        <router-link to="dashboard" v-if="!isAuthenticated">Dashboard</router-link>
+      </li>
+      <li class="rf-nav-link" v-if="!isAuthenticated" @click="logout()">
+        <a>Logout</a>
       </li>
     </ul>
 
-    <modal name="login">
-      <login-form
-        @cancel="hide('login')"
-        @success="hide('login'); login()"
-        @redirected-to-register="hide('login'); show('register')"
-      />
-    </modal>
-    <modal name="register">
-      <register-form @cancel="hide('register')" @success="hide('register'); login()" />
-    </modal>
+    <login-modal
+      @cancel="hide('login-modal')"
+      @success="hide('login-modal'); login()"
+      @redirected-to-register="hide('login-modal'); show('register-modal')"
+    />
+    <register-modal @cancel="hide('register-modal')" @success="hide('register-modal'); login()" />
     <modal name="profile">
       <profile-card />
     </modal>
@@ -43,23 +37,28 @@
 
 <script>
 import Vue from 'vue'
-// import LoginForm from '@/components/Login.vue'
-// import RegisterForm from '@/components/Register.vue'
-// import ProfileCard from '@/components/ProfileCard.vue'
+import LoginModal from '@/components/LoginModal.rf.vue'
+import RegisterModal from '@/components/RegisterModal.rf.vue'
+import ProfileCard from '@/components/ProfileCard.vue'
 
 export default Vue.extend({
-  name: 'menu',
+  name: 'Menu',
   components: {
-    // LoginForm,
-    // RegisterForm,
-    // ProfileCard,
+    LoginModal,
+    RegisterModal,
+    ProfileCard,
   },
   data() {
     return {
-      // TODO luka - userValid was not used anywhere. Should it be?
-      // userValid: false,
       isAuthenticated: false,
+      modalWidth: 320,
     }
+  },
+  created() {
+    window.addEventListener('resize', this.handleResize)
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.handleResize)
   },
   methods: {
     hide(name) {
@@ -80,19 +79,15 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 $nav: (
-  base: text-large font-pacifico bg-black-transparent-50 pv-0p5 ph-2,
+  base: text-large bg-black-transparent-50 pv-0p5 ph-2,
   wrap: flex flex-mid,
-  logo: mr-auto title,
-  item: ml-2,
-  link: decoration-none decoration-none--hover,
-  create-event-btn: bg-orange-300 bg-orange--hover bg-orange-500--active ph-0p75
-    pv-0p25 transition transition-bg,
+  logo: mr-auto,
+  logo-text: title-medium font-pacifico,
+  link: ml-2 font-pacifico,
+  create-event-btn: button-orange ph-0p75 pv-0p25 text-shadow,
 );
 
 .rf-nav {
   @include extendMap($nav);
-}
-.rf-nav-create-event-btn {
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 </style>

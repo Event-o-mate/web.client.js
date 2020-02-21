@@ -80,7 +80,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 $background_color: #404142;
 $github_color: #dba226;
 $facebook_color: #3880ff;

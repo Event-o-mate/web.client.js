@@ -10,6 +10,9 @@ $flex-prop-map: (
   flex-wrap: (
     wrap: wrap,
   ),
+  flex-grow: (
+    grow: 1,
+  ),
   justify-content: (
     left: flex-start,
     right: flex-end,
@@ -33,9 +36,6 @@ $flex-prop-map: (
       mid: center,
       stretch: stretch,
     ),
-  ),
-  flex-grow: (
-    grow: 1,
   ),
 );
 

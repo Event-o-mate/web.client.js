@@ -5,10 +5,10 @@ $transition-map: (
     quick: 0.15s,
   ),
   transition-property: (
-    colors: background color fill,
-    color: color,
-    bg: background,
     all: all,
+    bg: background,
+    color: color,
+    colors: background color fill,
     fill: fill,
   ),
 );

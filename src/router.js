@@ -1,7 +1,7 @@
 import Create_event from '@/components/Create_event.vue'
 import Dashboard from '@/components/Dashboard.vue'
 import Event from '@/components/Event.vue'
-import Home from '@/components/Home.vue'
+import Home from '@/components/Home.rf.vue'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
