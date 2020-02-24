@@ -1,10 +1,10 @@
 <template>
   <modal name="login-modal" :adaptive="true" width="451" height="auto" classes="signup-modal">
     <form autocomplete="false">
-      <input type="text" class="signup-input" placeholder="Email" v-model="model.email" />
+      <input type="text" class="form-input" placeholder="Email" v-model="model.email" />
       <input
         type="password"
-        class="signup-input signup-input-next"
+        class="form-input form-input-next"
         placeholder="Password"
         v-model="model.password"
       />

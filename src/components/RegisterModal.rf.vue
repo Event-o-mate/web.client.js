@@ -1,16 +1,16 @@
 <template>
   <modal name="register-modal" :adaptive="true" width="451" height="auto" classes="signup-modal">
     <form autocomplete="false">
-      <input type="text" class="signup-input" placeholder="Name" v-model="model.name" />
+      <input type="text" class="form-input" placeholder="Name" v-model="model.name" />
       <input
         type="text"
-        class="signup-input signup-input-next"
+        class="form-input form-input-next"
         placeholder="Email"
         v-model="model.email"
       />
       <input
         type="password"
-        class="signup-input signup-input-next"
+        class="form-input form-input-next"
         placeholder="Password"
         v-model="model.password"
       />

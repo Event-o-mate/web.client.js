@@ -21,6 +21,9 @@
       <li class="rf-nav-link" v-if="!isAuthenticated" @click="logout()">
         <a>Logout</a>
       </li>
+      <li class="rf-nav-link" v-if="!isAuthenticated" @click="show('profile-modal')">
+        <a>Profile</a>
+      </li>
     </ul>
 
     <login-modal
@@ -29,9 +32,7 @@
       @redirected-to-register="hide('login-modal'); show('register-modal')"
     />
     <register-modal @cancel="hide('register-modal')" @success="hide('register-modal'); login()" />
-    <modal name="profile">
-      <profile-card />
-    </modal>
+    <profile-modal />
   </nav>
 </template>
 
@@ -39,14 +40,14 @@
 import Vue from 'vue'
 import LoginModal from '@/components/LoginModal.rf.vue'
 import RegisterModal from '@/components/RegisterModal.rf.vue'
-import ProfileCard from '@/components/ProfileCard.vue'
+import ProfileModal from '@/components/ProfileModal.rf.vue'
 
 export default Vue.extend({
   name: 'Menu',
   components: {
     LoginModal,
     RegisterModal,
-    ProfileCard,
+    ProfileModal,
   },
   data() {
     return {
@@ -79,8 +80,8 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 $nav: (
-  base: text-large bg-black-transparent-50 pv-0p5 ph-2,
-  wrap: flex flex-mid,
+  base: text-large bg-black-transparent-66 h-75 ph-2,
+  wrap: flex flex-mid h-1-1,
   logo: mr-auto,
   logo-text: title-medium font-pacifico,
   link: ml-2 font-pacifico,

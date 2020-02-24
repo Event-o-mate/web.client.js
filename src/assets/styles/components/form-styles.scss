@@ -1,0 +1,8 @@
+$form-styles: (
+  input: w-1-1 color-dark bg-white p-0p5 text,
+  input-next: mt-1,
+);
+
+.form {
+  @include extendMap($form-styles);
+}
