@@ -1,10 +1,9 @@
 <template>
-  <modal name="register-modal" :adaptive="true" width="451" height="auto" classes="signup-modal">
+  <section class="signup-card">
     <form autocomplete="false">
-      <input type="text" class="form-input" placeholder="Name" v-model="model.name" />
       <input
         type="text"
-        class="form-input form-input-next"
+        class="form-input"
         placeholder="Email"
         v-model="model.email"
       />
@@ -15,29 +14,42 @@
         v-model="model.password"
       />
     </form>
-    <button class="signup-button" @click="register()">Register</button>
+    <button
+      @keydown.enter.native="login()"
+      class="signup-button button-purple"
+      @click="login()"
+    >
+      Login
+    </button>
+    <button class="signup-text-link" @click="$emit('redirected-to-register')">
+      Don't have an account? Register.
+    </button>
     <p class="signup-alert" v-if="true">Please enter all required fields.</p>
-  </modal>
+  </section>
 </template>
 
 <script>
 // import { ValidationProvider } from 'vee-validate'
+// import RegisterForm from '@/components/Register.vue'
 import UserService from '@/services/UserService.vue'
 
 export default {
-  name: 'RegisterModal',
+  name: 'LoginCard',
   components: {
     // ValidationProvider,
+    // RegisterForm,
     // UserService,
   },
   data() {
     return {
       model: {
-        name: '',
         email: '',
         password: '',
+        rememberMe: false,
       },
       errors: [],
+      showRegisterModal: false,
+      submitted: false,
       isValidationAllowed: false,
       searchTerm: '',
     }
@@ -51,15 +63,14 @@ export default {
     validate() {
       this.isValidationAllowed = true
     },
-    register() {
-      const user = {
-        name: this.model.name,
-        email: this.model.email,
-        password: this.model.password,
-      }
-      UserService.register(user)
-        .then(() => {
-          this.$router.push('home')
+    login() {
+      const user = { email: this.model.email, password: this.model.password }
+
+      UserService.login(user)
+        .then(r => {
+          this.$router.push('dashboard')
+          this.$emit('success')
+          this.$store.dispatch('setToken', r.data.id)
         })
         .catch(() => {})
     },
@@ -67,6 +78,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-// signup-modal.scss
+<style lang="scss">
+// signup-cards.scss
 </style>

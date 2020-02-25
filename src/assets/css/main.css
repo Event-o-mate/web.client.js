@@ -69,9 +69,9 @@
     transition: ease-in-out;
     margin-top: 10px;
   }
-  .widgets-list li {
+  /* .widgets-list li {
     width: 75px;
-  }
+  } */
   .container {
     width: 576px;
     max-width: 100%;
@@ -142,9 +142,9 @@
     transition: ease-in-out;
     margin-top: 10px;
   }
-  .widgets-list li {
+  /* .widgets-list li {
     width: 75px;
-  }
+  } */
   .container {
     width: 576px;
     max-width: 100%;
@@ -322,9 +322,9 @@
     min-inline-size: min-content;
     margin-top: 10px;
   }
-  .widgets-list li {
+  /* .widgets-list li {
     width: 75px;
-  }
+  } */
   .container {
     max-width: 100%;
   }
@@ -683,7 +683,7 @@ ul.nav a:hover {
   line-height: 2 !important;
 }
 
-.widgets-list {
+/* .widgets-list {
   list-style: none;
   background-size: contain;
   padding: 0;
@@ -699,9 +699,9 @@ ul.nav a:hover {
   cursor: pointer;
   margin: 7px;
   background-size: 70% 70%;
-}
+} */
 
-.comment-widget-icon {
+/* .comment-widget-icon {
   background: url('/img/comment.svg') center center no-repeat;
   background-size: 100% 100%;
 }
@@ -714,7 +714,7 @@ ul.nav a:hover {
 .fb-invitations-widget-icon {
   background: url('/img/mail.svg') center center no-repeat;
   background-size: 100% 100%;
-}
+} */
 
 .snt-comment-profile-img {
   height: 50px !important;
@@ -1038,7 +1038,7 @@ ul.nav a:hover {
 .atendees-list li span {
 }
 
-.details-wrapper {
+/* .details-wrapper {
   margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
@@ -1052,7 +1052,7 @@ ul.nav a:hover {
 }
 .details-wrapper img {
   width: 100%;
-}
+} */
 
 /* DASHBOARD PAGE */
 #dashboard-page {

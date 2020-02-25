@@ -9,17 +9,19 @@
 
           <input type="text" placeholder="Name" v-model="model.name" />
           <input type="text" placeholder="Email" v-model="model.email" />
-          <input type="password" placeholder="Password" v-model="model.password" />
+          <input
+            type="password"
+            placeholder="Password"
+            v-model="model.password"
+          />
         </form>
 
         <div class="button-set mt-3">
           <button class="register-btn2" @click="login()">Register</button>
           <p>
-            <a
-              class="alert-login"
-              v-if="validated"
-              style="color: white;"
-            >Name email and password need to be present.</a>
+            <a class="alert-login" v-if="validated" style="color: white;"
+              >Name email and password need to be present.</a
+            >
           </p>
         </div>
       </div>
@@ -29,14 +31,14 @@
 
 <script>
 const MODAL_WIDTH = 656
-import { ValidationProvider } from 'vee-validate'
+// import { ValidationProvider } from 'vee-validate'
 import UserService from '@/services/UserService.vue'
 
 export default {
   name: 'RegisterForm',
   components: {
-    ValidationProvider,
-    UserService,
+    // ValidationProvider,
+    // UserService,
   },
   data() {
     return {
@@ -71,10 +73,10 @@ export default {
         password: this.model.password,
       }
       UserService.register(user)
-        .then(r => {
+        .then(() => {
           this.$router.push('home')
         })
-        .catch(error => {})
+        .catch(() => {})
     },
   },
 }

@@ -1,0 +1,12 @@
+$signup-styles: (
+  card: bg-black-transparent-66 pv-3 ph-5 fillet flex flex-column flex-center
+    color-white center fixed w-1-1 w-350 s_w-450 box,
+  button: button-purple mh-auto mt-2 pv-0p5 ph-2 w-auto s_w-200 text-large
+    uppercase letter-spacing-1 fillet,
+  text-link: mt-1 text-medium,
+  alert: bg-red-900 text-center text pv-1 ph-1 mt-2p5,
+);
+
+.signup {
+  @include extendMap($signup-styles);
+}
