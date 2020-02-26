@@ -12,7 +12,9 @@
             @click="toggleState"
             v-on:mouseover="mouseover"
             v-on:mouseleave="mouseleave"
-          >{{message}}</button>
+          >
+            {{ message }}
+          </button>
         </div>
 
         <div id="atendees-wrapper">
@@ -30,12 +32,16 @@
 
         <div class="map-wrapper">
           <h5>model.address</h5>
-          <gmap-map :center="center" :zoom="12" style="width:100%;  height: 400px;">
+          <gmap-map
+            :center="center"
+            :zoom="12"
+            style="width:100%;  height: 400px;"
+          >
             <gmap-marker
               :key="index"
               v-for="(m, index) in markers"
               :position="m.position"
-              @click="center=m.position"
+              @click="center = m.position"
             ></gmap-marker>
           </gmap-map>
         </div>
@@ -59,7 +65,10 @@
                 />
               </div>
               <div class="snt-comment-content col-md-10">
-                <textarea ng-model="event.comment" placeholder="Write a comment ..."></textarea>
+                <textarea
+                  ng-model="event.comment"
+                  placeholder="Write a comment ..."
+                ></textarea>
               </div>
             </div>
             <div class="row">
@@ -67,11 +76,16 @@
                 <a
                   class="snt-submit-comment btn btn-xs btn-primary"
                   @click="event.addComment()"
-                >Submit</a>
+                  >Submit</a
+                >
               </div>
             </div>
 
-            <div class="row" v-for="comment in event.eventComments" :key="comment">
+            <div
+              class="row"
+              v-for="comment in event.eventComments"
+              :key="comment"
+            >
               <hr />
               <div class="col-md-2">
                 <img
@@ -96,8 +110,8 @@
   </div>
 </template>
 <script>
-import DescriptionField from '@/components/CreateEventDescriptionField.vue'
-import InfoWindow from '@/components/InfoWindow.vue'
+// import DescriptionField from '@/components/CreateEventDescriptionField.vue'
+// import InfoWindow from '@/components/InfoWindow.vue'
 
 export default {
   name: 'GoogleMap',
@@ -133,58 +147,58 @@ export default {
       twoWay: true,
     },
   },
-  events: {
-    'location-picker-init'(options) {
-      this.geocoder = new google.maps.Geocoder()
-      this.map = new google.maps.Map(
-        this.$els.map,
-        Object.assign(
-          {
-            center: { lat: 0, lng: 0 },
-            zoom: 3,
-            disableDefaultUI: true,
-          },
-          (this.marker = { icon: '@/assets/marker.png' }),
-          options.map,
-        ),
-      )
-      this.marker = new google.maps.Marker(
-        Object.assign(
-          {
-            map: this.map,
-            position: this.map.getCenter(),
-            draggable: true,
-          },
-          options.marker,
-        ),
-      )
-      this.infoWindow = new google.maps.InfoWindow(
-        Object.assign(
-          {
-            content: this.$refs.info.$el,
-          },
-          options.infoWindow,
-        ),
-      )
-      this.autocomplete = new google.maps.places.Autocomplete(
-        this.$els.input,
-        Object.assign(
-          {
-            types: ['geocode'],
-          },
-          options.autocomplete,
-        ),
-      )
-      this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(
-        this.$els.input,
-      )
-      // events
-      google.maps.event.addListenerOnce(this.map, 'idle', this.openInfoWindow)
-      this.marker.addListener('dragstart', this.closeInfoWindow)
-      this.marker.addListener('dragend', this.geocodeLocation)
-      this.autocomplete.addListener('place_changed', this.moveMarker)
-    },
-  },
+  // events: {
+  //   'location-picker-init'(options) {
+  //     this.geocoder = new google.maps.Geocoder()
+  //     this.map = new google.maps.Map(
+  //       this.$els.map,
+  //       Object.assign(
+  //         {
+  //           center: { lat: 0, lng: 0 },
+  //           zoom: 3,
+  //           disableDefaultUI: true,
+  //         },
+  //         (this.marker = { icon: '@/assets/marker.png' }),
+  //         options.map,
+  //       ),
+  //     )
+  //     this.marker = new google.maps.Marker(
+  //       Object.assign(
+  //         {
+  //           map: this.map,
+  //           position: this.map.getCenter(),
+  //           draggable: true,
+  //         },
+  //         options.marker,
+  //       ),
+  //     )
+  //     this.infoWindow = new google.maps.InfoWindow(
+  //       Object.assign(
+  //         {
+  //           content: this.$refs.info.$el,
+  //         },
+  //         options.infoWindow,
+  //       ),
+  //     )
+  //     this.autocomplete = new google.maps.places.Autocomplete(
+  //       this.$els.input,
+  //       Object.assign(
+  //         {
+  //           types: ['geocode'],
+  //         },
+  //         options.autocomplete,
+  //       ),
+  //     )
+  //     this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(
+  //       this.$els.input,
+  //     )
+  //     // events
+  //     google.maps.event.addListenerOnce(this.map, 'idle', this.openInfoWindow)
+  //     this.marker.addListener('dragstart', this.closeInfoWindow)
+  //     this.marker.addListener('dragend', this.geocodeLocation)
+  //     this.autocomplete.addListener('place_changed', this.moveMarker)
+  //   },
+  // },
   methods: {
     initalStateLoader() {
       this.event = {
@@ -198,7 +212,7 @@ export default {
     toggleState: function() {
       this.isActive = !this.isActive
       this.message = 'RSVP'
-      PointerEvent: none
+      // PointerEvent: none
     },
     mouseover: function() {
       if (this.isActive) {
