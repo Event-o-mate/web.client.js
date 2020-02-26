@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import vStylish from 'v-stylish'
 import { extend as ValidationExtend, ValidationProvider } from 'vee-validate'
 import { required as requiredValidation } from 'vee-validate/dist/rules'
 import Vue from 'vue'
@@ -15,7 +14,6 @@ import '@/assets/css/main.css'
 import '@/assets/css/autocomplete.css'
 import '@/assets/css/pacifico.css'
 
-Vue.use(vStylish)
 Vue.use(VueJsModal)
 Vue.use(VueFlatPickr)
 Vue.use(VueGoogleMaps, {

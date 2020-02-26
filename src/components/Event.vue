@@ -8,9 +8,8 @@
         <div id="rsvp-button-wrapper" :v-show="event.submitRsvp">
           <button
             type="button"
-            class="btn btn-publish2 is-active"
+            :class="rsvpButtonClass"
             @click="toggleState"
-            v-class:is-active="isActive"
             v-on:mouseover="mouseover"
             v-on:mouseleave="mouseleave"
           >{{message}}</button>
@@ -235,6 +234,15 @@ export default {
       })
     },
     submitRsvp() {},
+  },
+  computed: {
+    rsvpButtonClass() {
+      return {
+        btn: true,
+        'btn-publish2': true,
+        'is-active': this.isActive,
+      }
+    },
   },
 }
 </script>
