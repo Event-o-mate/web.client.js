@@ -2,7 +2,9 @@
   <div id="app">
     <rotating-bg v-show="showBackground" />
     <Menu />
-    <router-view />
+    <main>
+      <router-view />
+    </main>
   </div>
 </template>
 

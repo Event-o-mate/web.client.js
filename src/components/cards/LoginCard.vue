@@ -2,6 +2,7 @@
   <section class="signup-card">
     <form autocomplete="false">
       <input
+        id="login-focus"
         type="text"
         class="form-input"
         placeholder="Email"
@@ -15,9 +16,10 @@
       />
     </form>
     <button class="signup-button" @click="login()">Login</button>
-    <button class="signup-text-link" @click="$emit('redirected-to-register')">
-      Don't have an account? Register.
-    </button>
+    <button
+      class="signup-text-link"
+      @click="$emit('redirected-to-register')"
+    >Don't have an account? Register.</button>
     <p class="signup-alert" v-if="true">Please enter all required fields.</p>
   </section>
 </template>

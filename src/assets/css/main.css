@@ -898,9 +898,9 @@ ul.nav a:hover {
   display: none;
 }
 
-.dashboard-button {
+/* .dashboard-button {
   display: none;
-}
+} */
 
 /* AUTH DIALOGS */
 
@@ -1055,16 +1055,16 @@ ul.nav a:hover {
 } */
 
 /* DASHBOARD PAGE */
-#dashboard-page {
+/* #dashboard-page {
 }
 #dashboard-page h3 {
   text-shadow: 1px 1px black;
 }
 #dasboard-wrapper {
   text-align: center;
-}
+} */
 
-.event-list {
+/* .event-list {
   padding-top: 20px 0;
   list-style: none;
   padding: inherit;
@@ -1092,7 +1092,7 @@ ul.nav a:hover {
   margin: 0;
   padding-right: 5px;
   display: inline-block;
-}
+} */
 /* 
 @-webkit-keyframes robohover {
   0% {

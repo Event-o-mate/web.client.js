@@ -1,17 +1,14 @@
 <template>
-  <ul class="nav-links-wrap">
+  <ul class="nav-links-wrap" role="navigation" aria-label="Page navigation">
     <li class="nav-links-item">
       <button
-        @click="$router.push('/create_event')"
+        :id="dropdown ? 'nav-focus' : ''"
+        @click="$router.push('/create_event').catch(() => {})"
         class="nav-links-link nav-links-create-event-btn"
-      >
-        Create Event
-      </button>
+      >Create Event</button>
     </li>
     <li class="nav-links-item" v-if="!isAuthenticated">
-      <button class="nav-links-link" @click="$emit('show-register')">
-        Register
-      </button>
+      <button class="nav-links-link" @click="$emit('show-register')">Register</button>
     </li>
     <li class="nav-links-item" v-if="!isAuthenticated">
       <button class="nav-links-link" @click="$emit('show-login')">Login</button>
@@ -19,19 +16,15 @@
     <li class="nav-links-item">
       <button
         class="nav-links-link"
-        @click="$router.push('/dashboard')"
+        @click="$router.push('/dashboard').catch(() => {})"
         v-if="!isAuthenticated"
-      >
-        Dashboard
-      </button>
+      >Dashboard</button>
     </li>
     <li class="nav-links-item" v-if="!isAuthenticated">
       <button class="nav-links-link" @click="$emit('logout')">Logout</button>
     </li>
     <li class="nav-links-item" v-if="!isAuthenticated">
-      <button class="nav-links-link" @click="$emit('show-profile')">
-        Profile
-      </button>
+      <button class="nav-links-link" @click="$emit('show-profile')">Profile</button>
     </li>
   </ul>
 </template>
@@ -39,7 +32,7 @@
 <script>
 export default {
   name: '',
-  props: ['isAuthenticated'],
+  props: ['isAuthenticated', 'dropdown'],
 }
 </script>
 

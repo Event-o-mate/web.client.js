@@ -2,6 +2,7 @@
   <section class="signup-card">
     <form autocomplete="false">
       <input
+        id="register-focus"
         type="text"
         class="form-input"
         placeholder="Name"

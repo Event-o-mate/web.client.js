@@ -8,10 +8,11 @@
           <label class="create-event-label" for="event-name">Event name*</label>
           <p class="create-event-error">{{ errors[0] }}</p>
           <input
+            ref="event-name-input"
             v-model="model.title"
             type="text"
             class="create-event-input"
-            id="event-name"
+            id="event-name-input"
             required
           />
         </validation-provider>
@@ -19,14 +20,12 @@
 
       <div class="create-event-field-small-left">
         <validation-provider rules="required" v-slot="{ errors }">
-          <label class="create-event-label" for="event-start-time"
-            >Start time*</label
-          >
+          <label class="create-event-label" for="event-start-time">Start time*</label>
           <span class="create-event-error">{{ errors[0] }}</span>
           <flat-pickr
             name="startTime"
             type="text"
-            id="event-start-time"
+            id="event-start-time-input"
             class="create-event-input"
             v-model="model.startTime"
             :config="config"
@@ -37,14 +36,12 @@
 
       <div class="create-event-field-small-right">
         <validation-provider rules="required" v-slot="{ errors }">
-          <label class="create-event-label" for="event-end-time"
-            >End time*</label
-          >
+          <label class="create-event-label" for="event-end-time">End time*</label>
           <span class="create-event-error">{{ errors[0] }}</span>
           <flat-pickr
             name="endTime"
             type="text"
-            id="event-end-time"
+            id="event-end-time-input"
             class="create-event-input"
             v-model="model.endTime"
             :config="config"
@@ -60,12 +57,10 @@
           rules="required|location"
           v-slot="{ errors }"
         >
-          <label class="create-event-label" for="event-location"
-            >Location*</label
-          >
+          <label class="create-event-label" for="event-location">Location*</label>
           <p class="create-event-error">{{ errors[0] }}</p>
           <gmap-autocomplete
-            id="event-location"
+            id="event-location-input"
             class="create-event-input"
             placeholder
             @place_changed="setAddress"
@@ -75,13 +70,11 @@
       </div>
 
       <div class="create-event-field">
-        <label class="create-event-label" for="event-description"
-          >Description*</label
-        >
+        <label class="create-event-label" for="event-description">Description*</label>
         <textarea
           v-model="model.description"
           class="create-event-input"
-          id="event-description"
+          id="event-description-input"
           required
         />
       </div>
@@ -100,18 +93,14 @@
       type="button"
       class="create-event-button-add-section"
       @click="handleAdd()"
-    >
-      + Add new Section
-    </button>
+    >+ Add new Section</button>
 
     <button
       type="button"
       class="create-event-button-publish"
       @click="submit()"
       href="Dashboard"
-    >
-      Publish event
-    </button>
+    >Publish event</button>
   </div>
 </template>
 
@@ -122,7 +111,6 @@ import 'flatpickr/dist/themes/dark.css'
 import DescriptionField from '@/components/CreateEventDescriptionField.vue'
 import { ValidationProvider } from 'vee-validate'
 import EventService from '@/services/EventService.vue'
-// import RotatingBg from '@/components/special/RotatingBg.vue'
 
 export default {
   components: {
@@ -161,7 +149,10 @@ export default {
       },
     }
   },
-
+  mounted() {
+    const focusField = this.$refs['event-name-input']
+    if (focusField) focusField.focus()
+  },
   methods: {
     handleInput(value) {
       this.model.address = value
@@ -218,7 +209,7 @@ export default {
 
 <style lang="scss" scoped>
 $create-event-styles: (
-  base: container mt-2 ph-1 box,
+  base: container,
   title: title bold text-center,
   field: mt-1,
   field-small: (

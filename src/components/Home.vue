@@ -1,51 +1,44 @@
 <template>
-  <div class="rf-home">
-    <h2 class="rf-home-headline">Create your event in only one step!</h2>
+  <div class="home">
+    <h2 class="home-headline">Create your event in only one step!</h2>
 
-    <div class="rf-home-graphic">
+    <div class="home-graphic">
       <object
-        class="rf-home-graphic-planet"
+        class="home-graphic-planet"
         type="image/svg+xml"
         data="/img/planet.svg"
         width="300"
         height="300"
-        >Your browser does not support SVG</object
-      >
+      >Your browser does not support SVG</object>
       <object
-        class="rf-home-graphic-robot"
+        class="home-graphic-robot"
         type="image/svg+xml"
         data="img/robot.svg"
         width="300"
         height="300"
-        >Your browser does not support SVG</object
-      >
+      >Your browser does not support SVG</object>
 
-      <div class="rf-home-graphic-counter">0</div>
+      <div class="home-graphic-counter">0</div>
     </div>
 
-    <router-link class="rf-home-button" to="/create_event"
-      >Create Event</router-link
-    >
+    <router-link class="home-button" to="/create_event">Create Event</router-link>
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
-// import RotatingBg from '@/components/special/RotatingBg.vue'
-
-export default Vue.extend({
+export default {
   name: 'Home',
   components: {
     // RotatingBg,
   },
-})
+}
 </script>
 
 <style lang="scss" scoped>
 $home-styles: (
-  base: flex flex-column flex-center text-center pb-5,
+  base: flex flex-column flex-center text-center mt-3 mb-5,
   background: w-1-1 display-initial fixed center,
-  headline: font-pacifico mt-2p5 title-xlarge z--5,
+  headline: font-pacifico title-xlarge z--5,
   graphic: (
     base: mt-4 w-600 mh-auto relative z--5,
     robot: inline-block,
@@ -56,24 +49,24 @@ $home-styles: (
     font-pacifico,
 );
 
-.rf-home {
+.home {
   @include extendMap($home-styles);
 }
 
-.rf-home-background-rotation {
+.home-background-rotation {
   -webkit-animation: rotateBg 300s linear infinite; /* Safari 4+ */
   -moz-animation: rotateBg 300s linear infinite; /* Fx 5+ */
   -o-animation: rotateBg 300s linear infinite; /* Opera 12+ */
   animation: rotateBg 300s linear infinite; /* IE 10+, Fx 29+ */
 }
 
-.rf-home-graphic-counter {
+.home-graphic-counter {
   transform: rotate(-17deg);
   top: 57px;
   left: 50px;
 }
 
-.rf-home-graphic-robot {
+.home-graphic-robot {
   -webkit-animation: robohover 3s ease-in-out infinite; /* Safari 4+ */
   -moz-animation: robohover 3s ease-in-out infinite; /* Fx 5+ */
   -o-animation: robohover 3s ease-in-out infinite; /* Opera 12+ */
