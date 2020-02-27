@@ -2,8 +2,6 @@
   <div class="rf-home">
     <h2 class="rf-home-headline">Create your event in only one step!</h2>
 
-    <rotating-bg />
-
     <div class="rf-home-graphic">
       <object
         class="rf-home-graphic-planet"
@@ -11,30 +9,34 @@
         data="/img/planet.svg"
         width="300"
         height="300"
-      >Your browser does not support SVG</object>
+        >Your browser does not support SVG</object
+      >
       <object
         class="rf-home-graphic-robot"
         type="image/svg+xml"
         data="img/robot.svg"
         width="300"
         height="300"
-      >Your browser does not support SVG</object>
+        >Your browser does not support SVG</object
+      >
 
       <div class="rf-home-graphic-counter">0</div>
     </div>
 
-    <router-link class="rf-home-button" to="/create_event">Create Event</router-link>
+    <router-link class="rf-home-button" to="/create_event"
+      >Create Event</router-link
+    >
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
-import RotatingBg from '@/components/special/RotatingBg.vue'
+// import RotatingBg from '@/components/special/RotatingBg.vue'
 
 export default Vue.extend({
   name: 'Home',
   components: {
-    RotatingBg,
+    // RotatingBg,
   },
 })
 </script>
@@ -42,7 +44,7 @@ export default Vue.extend({
 <style lang="scss" scoped>
 $home-styles: (
   base: flex flex-column flex-center text-center pb-5,
-  background: w-1-1 display-initial fixed center z--10,
+  background: w-1-1 display-initial fixed center,
   headline: font-pacifico mt-2p5 title-xlarge z--5,
   graphic: (
     base: mt-4 w-600 mh-auto relative z--5,
@@ -51,7 +53,7 @@ $home-styles: (
     counter: w-100 h-50 flex flex-mid flex-center absolute text-large,
   ),
   button: block button-orange text-shadow w-450 pv-0p75 mt-6 mh-auto title
-    font-pacifico z--5,
+    font-pacifico,
 );
 
 .rf-home {

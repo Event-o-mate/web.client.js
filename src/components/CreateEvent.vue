@@ -1,7 +1,7 @@
 <template>
   <div class="create-event">
-    <rotating-bg />
     <h2 class="create-event-title">Create new event</h2>
+
     <form name="createEventForm">
       <div class="create-event-field">
         <validation-provider rules="required" v-slot="{ errors }">
@@ -19,7 +19,9 @@
 
       <div class="create-event-field-small-left">
         <validation-provider rules="required" v-slot="{ errors }">
-          <label class="create-event-label" for="event-start-time">Start time*</label>
+          <label class="create-event-label" for="event-start-time"
+            >Start time*</label
+          >
           <span class="create-event-error">{{ errors[0] }}</span>
           <flat-pickr
             name="startTime"
@@ -35,7 +37,9 @@
 
       <div class="create-event-field-small-right">
         <validation-provider rules="required" v-slot="{ errors }">
-          <label class="create-event-label" for="event-end-time">End time*</label>
+          <label class="create-event-label" for="event-end-time"
+            >End time*</label
+          >
           <span class="create-event-error">{{ errors[0] }}</span>
           <flat-pickr
             name="endTime"
@@ -56,7 +60,9 @@
           rules="required|location"
           v-slot="{ errors }"
         >
-          <label class="create-event-label" for="event-location">Location*</label>
+          <label class="create-event-label" for="event-location"
+            >Location*</label
+          >
           <p class="create-event-error">{{ errors[0] }}</p>
           <gmap-autocomplete
             id="event-location"
@@ -69,7 +75,9 @@
       </div>
 
       <div class="create-event-field">
-        <label class="create-event-label" for="event-description">Description*</label>
+        <label class="create-event-label" for="event-description"
+          >Description*</label
+        >
         <textarea
           v-model="model.description"
           class="create-event-input"
@@ -92,14 +100,18 @@
       type="button"
       class="create-event-button-add-section"
       @click="handleAdd()"
-    >+ Add new Section</button>
+    >
+      + Add new Section
+    </button>
 
     <button
       type="button"
       class="create-event-button-publish"
       @click="submit()"
       href="Dashboard"
-    >Publish event</button>
+    >
+      Publish event
+    </button>
   </div>
 </template>
 
@@ -110,14 +122,14 @@ import 'flatpickr/dist/themes/dark.css'
 import DescriptionField from '@/components/CreateEventDescriptionField.vue'
 import { ValidationProvider } from 'vee-validate'
 import EventService from '@/services/EventService.vue'
-import RotatingBg from '@/components/special/RotatingBg.vue'
+// import RotatingBg from '@/components/special/RotatingBg.vue'
 
 export default {
   components: {
     flatPickr,
     DescriptionField,
     ValidationProvider,
-    RotatingBg,
+    // RotatingBg,
     // EventService
   },
   data() {

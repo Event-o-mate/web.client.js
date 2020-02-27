@@ -14,7 +14,6 @@
     "plugin": "^0.3.3",
     "vee-validate": "^3.2.5",
     "vue": "^2.6.11",
-    "vue-clickaway2": "^2.3.1",
     "vue-flatpickr-component": "^8.1.5",
     "vue-location-picker": "^1.0.1",
     "vue-router": "^3.1.6",

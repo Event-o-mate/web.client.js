@@ -4,7 +4,8 @@
       class="rotating-bg-animation"
       type="image/svg+xml"
       data="img/rotoBg.svg"
-    >Your browser does not support SVG</object>
+      >Your browser does not support SVG</object
+    >
   </div>
 </template>
 
@@ -18,7 +19,7 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 .rotating-bg {
-  @include extendList(w-1-1 display-initial fixed center z--10);
+  @include extendList(fixed center z--10 w-s s_w-1-1);
 }
 
 .rotating-bg-animation {

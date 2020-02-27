@@ -44,9 +44,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
-
-export default Vue.extend({
+export default {
   name: 'DescriptionForm',
   data() {
     return {
@@ -71,7 +69,7 @@ export default Vue.extend({
       this.addCounter--
     },
   },
-})
+}
 </script>
 
 <style scoped lang="scss">

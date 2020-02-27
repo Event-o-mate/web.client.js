@@ -62,10 +62,10 @@ export default {
   },
   data() {
     return {
-      propsToSearch: ['tittle', 'startTime', 'endTime', 'address'],
+      propsToSearch: ['title', 'startTime', 'endTime', 'address'],
       tableColumns: [
         {
-          prop: 'tittle',
+          prop: 'title',
           label: 'Title',
           minWidth: 120,
           sortable: true,

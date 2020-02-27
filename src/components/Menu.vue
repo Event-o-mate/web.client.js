@@ -1,104 +1,125 @@
 <template>
-  <nav class="rf-nav">
-    <ul class="rf-nav-wrap">
-      <li class="rf-nav-logo">
+  <nav class="nav">
+    <ul class="nav-wrap">
+      <li class="nav-logo">
         <router-link to="/">
-          <h1 class="rf-nav-logo-text">Event-O-Mate</h1>
+          <h1 class="nav-logo-text">Event-O-Mate</h1>
         </router-link>
       </li>
-      <li class="rf-nav-link">
-        <router-link to="create_event" class="rf-nav-create-event-btn">Create Event</router-link>
+      <li class="nav-menu-navigation">
+        <menu-nav-links
+          :isAuthenticated="isAuthenticated"
+          @show-profile="show('profile')"
+          @show-register="show('register')"
+          @show-login="show('login')"
+        />
       </li>
-      <li class="rf-nav-link" v-if="!isAuthenticated">
-        <a @click="show('register')">Register</a>
-      </li>
-      <li class="rf-nav-link" v-if="!isAuthenticated">
-        <a @click="show('login')">Login</a>
-      </li>
-      <li class="rf-nav-link">
-        <router-link to="dashboard" v-if="!isAuthenticated">Dashboard</router-link>
-      </li>
-      <li class="rf-nav-link" v-if="!isAuthenticated" @click="logout()">
-        <a>Logout</a>
-      </li>
-      <li class="rf-nav-link" v-if="!isAuthenticated" @click="show('profile')">
-        <a>Profile</a>
+      <li class="nav-hamburger">
+        <button @click="show('nav')">ham</button>
       </li>
     </ul>
-    <div class="rf-nav-card-bg" v-show="cardBg"></div>
 
-    <!-- <login-modal
-      @cancel="hide('login-modal')"
-      @success="
-        hide('login-modal')
-        login()
-      "
-    />
-    <register-modal
-      @cancel="hide('register-modal')"
-      @success="
-        hide('register-modal')
-        login()
-      "
-    />
-    <profile-modal />-->
-    <login-card
-      v-show="card.login"
-      v-on-clickaway="hideFn('login')"
-      @redirected-to-register="hide('login'); show('register')"
-    />
-    <register-card v-show="card.register" v-on-clickaway="hideFn('register')" />
-    <profile-card v-show="card.profile" v-on-clickaway="hideFn('profile')" />
+    <transition name="fade">
+      <div class="nav-card-bg" v-show="cardShown" @click="closeCards()"></div>
+    </transition>
+
+    <transition name="slide-from-top-small">
+      <section
+        class="nav-dropdown-navigation"
+        @click="hide('nav')"
+        v-show="cards.nav"
+      >
+        <menu-nav-links
+          :isAuthenticated="isAuthenticated"
+          @show-profile="show('profile')"
+          @show-register="show('register')"
+          @show-login="show('login')"
+        />
+      </section>
+    </transition>
+
+    <transition name="slide-from-top">
+      <login-card
+        v-show="cards.login"
+        @cancel="hide('login')"
+        @success="
+          hide('login')
+          login()
+        "
+        @redirected-to-register="
+          hide('login')
+          show('register')
+        "
+      />
+    </transition>
+
+    <transition name="slide-from-top">
+      <register-card
+        v-show="cards.register"
+        @cancel="hide('login')"
+        @success="
+          hide('login')
+          login()
+        "
+      />
+    </transition>
+
+    <transition name="fade">
+      <profile-card v-show="cards.profile" />
+    </transition>
   </nav>
 </template>
 
 <script>
 import Vue from 'vue'
-import { mixin as clickaway } from 'vue-clickaway2'
 import LoginCard from '@/components/cards/LoginCard.vue'
 import RegisterCard from '@/components/cards/RegisterCard.vue'
 import ProfileCard from '@/components/cards/ProfileCard.vue'
+import MenuNavLinks from '@/components/MenuNavLinks.vue'
 
 export default Vue.extend({
   name: 'Menu',
-  mixins: [clickaway],
   components: {
     LoginCard,
     RegisterCard,
     ProfileCard,
+    MenuNavLinks,
   },
   data() {
     return {
       isAuthenticated: false,
       profileVisibility: false,
-      card: {
+      cards: {
         profile: false,
         login: false,
         register: false,
+        nav: false,
       },
     }
   },
   methods: {
     hide(name) {
-      this.card[name] = false
-    },
-    hideFn(name) {
-      // required because directives only take functions
-      return () => this.hide(name)
+      this.cards[name] = false
     },
     show(name) {
-      this.card[name] = true
+      this.closeCards()
+      this.cards[name] = true
+    },
+    closeCards() {
+      Object.keys(this.cards).forEach(x => (this.cards[x] = false))
     },
     login() {
+      // TODO - impl login
       this.isAuthenticated = true
     },
     logout() {
+      // TODO - impl logout
       this.isAuthenticated = false
     },
   },
   computed: {
-    cardBg() {
-      return Object.values(this.card).some(x => x === true)
+    cardShown() {
+      return Object.values(this.cards).some(x => x === true)
     },
   },
 })
@@ -106,17 +127,18 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 $nav: (
-  base: text-large bg-black-transparent-66 h-75,
-  wrap: flex flex-mid h-1-1 ph-2,
-  logo: mr-auto,
+  base: text-large bg-black-transparent-66,
+  wrap: flex flex-mid h-1-1 ph-2 pv-0p75,
+  logo: mr-auto white-space-pre,
   logo-text: title-medium font-pacifico,
-  link: ml-2 font-pacifico,
-  create-event-btn: button-orange ph-0p75 pv-0p25 text-shadow,
+  menu-navigation: display-none m_display-initial,
+  dropdown-navigation: m_display-none absolute w-1-1 bg-black-transparent-66,
+  hamburger: m_display-none,
   card: relative,
   card-bg: fixed center w-viewport h-viewport bg-black-transparent-20,
 );
 
-.rf-nav {
+.nav {
   @include extendMap($nav);
 }
 </style>

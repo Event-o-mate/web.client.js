@@ -10,13 +10,36 @@
         <em>gravatar.com</em>
       </a>
     </p>
-    <form name="userProfileForm" autocomplete="false" required class="profile-form">
+    <form
+      name="userProfileForm"
+      autocomplete="false"
+      required
+      class="profile-form"
+    >
       <p class="profile-form-title">Change credentials</p>
-      <input name="userName" type="text" placeholder="Name" class="form-input form-input-next" />
-      <input name="userEmail" type="email" placeholder="Email" class="form-input form-input-next" />
-      <button class="profile-form-button" ng-click="menu.saveUserProfile()">Save</button>
+      <input
+        autofocus
+        name="userName"
+        type="text"
+        placeholder="Name"
+        class="form-input form-input-next"
+      />
+      <input
+        name="userEmail"
+        type="email"
+        placeholder="Email"
+        class="form-input form-input-next"
+      />
+      <button class="profile-form-button" ng-click="menu.saveUserProfile()">
+        Save
+      </button>
     </form>
-    <form name="changePasswordForm" autocomplete="false" required class="profile-form">
+    <form
+      name="changePasswordForm"
+      autocomplete="false"
+      required
+      class="profile-form"
+    >
       <p class="profile-form-title">Change password</p>
       <input
         name="oldPassword"
@@ -36,14 +59,20 @@
         placeholder="Confirm password"
         class="form-input form-input-next"
       />
-      <button class="profile-form-button" ng-click="menu.changeUserPassword()">Change password</button>
+      <button class="profile-form-button" ng-click="menu.changeUserPassword()">
+        Change password
+      </button>
     </form>
     <form name required class="profile-form">
       <p class="profile-form-title">Notifications</p>
       <hr />
       <div class="profile-notifications">
         <p class="profile-notifications-text">Send me emails!</p>
-        <input name="sendNotifications" type="checkbox" class="profile-notifications-checkbox" />
+        <input
+          name="sendNotifications"
+          type="checkbox"
+          class="profile-notifications-checkbox"
+        />
       </div>
     </form>
   </section>
@@ -63,8 +92,8 @@ export default {
 
 <style lang="scss" scoped>
 $profile-styles: (
-  card: relative w-450 bg-black-transparent-66 ml-auto flex flex-column
-    flex-center ph-1 pb-1p5,
+  card: absolute w-450 bg-black-transparent-66 flex flex-column flex-center ph-1
+    pb-1p5 right,
   logo: mh-auto mt-2 inline-block fillet-large,
   logo-text: mt-1 text-center text-medium,
   form: mt-1p5,

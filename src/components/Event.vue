@@ -2,7 +2,7 @@
   <div class="container" id="event-page">
     <div class="row">
       <div class="col-md-8 offset-md-2" id="event-wrapper">
-        <h1 class="text-center">model.title</h1>
+        <h2 class="text-center">model.title</h2>
         <h5 class="text-center">model.startTime | - model.endTime |</h5>
 
         <div id="rsvp-button-wrapper" :v-show="event.submitRsvp">

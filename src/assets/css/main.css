@@ -489,13 +489,13 @@ ul.nav a:hover {
   color: #fff !important;
 }
 
-.nav {
+/* .nav {
   padding-left: 0;
   margin-bottom: 0;
   white-space: pre;
   margin-right: 10px;
   list-style: none;
-}
+} */
 
 .navbar {
   /* position: relative; */

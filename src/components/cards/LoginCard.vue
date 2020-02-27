@@ -14,13 +14,7 @@
         v-model="model.password"
       />
     </form>
-    <button
-      @keydown.enter.native="login()"
-      class="signup-button button-purple"
-      @click="login()"
-    >
-      Login
-    </button>
+    <button class="signup-button" @click="login()">Login</button>
     <button class="signup-text-link" @click="$emit('redirected-to-register')">
       Don't have an account? Register.
     </button>

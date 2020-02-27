@@ -3,7 +3,6 @@ import client from '@/util/client'
 
 export default {
   login(user) {
-    console.log(user)
     return client.post('/api/authenticate/login', user)
   },
 
