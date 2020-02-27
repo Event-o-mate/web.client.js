@@ -46,7 +46,8 @@ export default {
 <style scoped lang="scss">
 $nav: (
   wrap: flex flex-mid flex-column m_flex-row,
-  link: w-1-1 m_ml-2 font-pacifico white-space-pre block box text-center,
+  link: w-1-1 m_w-auto m_ml-2 font-pacifico white-space-pre block box
+    text-center,
   item: w-1-1 m_w-auto,
   create-event-btn: button-orange ph-0p75 pv-0p25 text-shadow,
 );
