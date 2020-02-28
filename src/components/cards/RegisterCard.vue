@@ -1,6 +1,6 @@
 <template>
   <section class="signup-card">
-    <form autocomplete="false">
+    <form autocomplete="false" id="register-form">
       <input
         id="register-focus"
         type="text"
@@ -21,7 +21,7 @@
         v-model="model.password"
       />
     </form>
-    <button class="signup-button" @click="register()">Register</button>
+    <button form="register-form" class="signup-button" @click="register()">Register</button>
     <p class="signup-alert" v-if="true">Please enter all required fields.</p>
   </section>
 </template>

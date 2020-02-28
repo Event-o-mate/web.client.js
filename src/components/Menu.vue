@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @keydown.esc="closeCards()">
     <nav class="nav">
       <section role="navigation" aria-label="Main navigation">
         <ul class="nav-wrap">
