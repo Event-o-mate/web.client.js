@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <rotating-bg v-show="showBackground" />
-    <Menu />
+    <Navigation />
     <main>
       <router-view />
     </main>
@@ -9,14 +9,14 @@
 </template>
 
 <script>
-import Menu from '@/components/Menu.vue'
+import Navigation from '@/components/Navigation.vue'
 import RotatingBg from '@/components/special/RotatingBg.vue'
 
 export default {
   name: 'app',
   components: {
     RotatingBg,
-    Menu,
+    Navigation,
   },
   computed: {
     showBackground() {

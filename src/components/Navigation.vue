@@ -9,7 +9,7 @@
             </router-link>
           </li>
           <li class="nav-menu-navigation">
-            <menu-nav-links
+            <navigation-links
               :isAuthenticated="isAuthenticated"
               @show-profile="show('profile')"
               @show-register="show('register')"
@@ -34,7 +34,7 @@
 
       <transition name="slide-from-top-small">
         <section class="nav-dropdown-navigation" @click="hide('nav')" v-show="cards.nav">
-          <menu-nav-links
+          <navigation-links
             :dropdown="true"
             :isAuthenticated="isAuthenticated"
             @show-profile="show('profile')"
@@ -82,7 +82,7 @@ import Vue from 'vue'
 import LoginCard from '@/components/cards/LoginCard.vue'
 import RegisterCard from '@/components/cards/RegisterCard.vue'
 import ProfileCard from '@/components/cards/ProfileCard.vue'
-import MenuNavLinks from '@/components/MenuNavLinks.vue'
+import NavigationLinks from '@/components/NavigationLinks.vue'
 
 export default Vue.extend({
   name: 'Menu',
@@ -90,7 +90,7 @@ export default Vue.extend({
     LoginCard,
     RegisterCard,
     ProfileCard,
-    MenuNavLinks,
+    NavigationLinks,
   },
   data() {
     return {
